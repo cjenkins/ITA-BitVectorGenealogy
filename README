@@ -14,9 +14,9 @@ would be the absolute value of the difference between two BitVectors minus the n
 in each BitVector times the mutation ratio.  (AKA: Actual difference compared to ideal relative
 difference.)
 
-3.  With this graph we can then calculate the minimum spanning tree to identify the most likely
-anscestry path through the graph.  This then gives us relationships between BitVectors, but
-does not identify in which direction the relationship flows.
+3.  With this distance graph we can then calculate the minimum spanning tree to identify the 
+most likely anscestry path through the graph.  This then gives us relationships between 
+BitVectors, but does not identify in which direction the relationship flows.
 
 4.  To get the parent to child relationship direction we identify BitVectors that only
 participate in a single relationship and mark those as children of the BitVector they are in a
