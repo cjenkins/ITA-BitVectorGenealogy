@@ -1,17 +1,46 @@
 # BitVectorGenealogy
 
-FIXME: write description
+This is a solution to ITA's BitVectorGenealogy hiring puzzle.  It was done using Clojure 1.2
+and the jgrapht graph algorithm library.
+
+The general gist of the solution is to:
+
+1.  Create a graph comparing each BitVector to each other to find out how many of their bits
+are different.  (AKA: Cardinality of xor between two BitVectors)
+
+2.  Using this difference graph and the expected mutation ratio, we can then calculate the
+"distance" that each vector is from being the ideal relative to each other BitVector.  This
+would be the absolute value of the difference between two BitVectors minus the number of bits
+in each BitVector times the mutation ratio.  (AKA: Actual difference compared to ideal relative
+difference.)
+
+3.  With this graph we can then calculate the minimum spanning tree to identify the most likely
+anscestry path through the graph.  This then gives us relationships between BitVectors, but
+does not identify in which direction the relationship flows.
+
+4.  To get the parent to child relationship direction we identify BitVectors that only
+participate in a single relationship and mark those as children of the BitVector they are in a
+relationship with.  We then remove the children vertices from the graph.  This is done
+iteratively until we have no BitVectors that participate in a single relationship.  These
+left over BitVectors are marked as progenitors.  (You can visualize this as pruning the leaf
+nodes from a graph in an iterative manner.  I believe this should result in a single left over
+node as the root but I don't have a proof for it at this time.)
+
+5.  You're done!
 
 ## Usage
 
-FIXME: write
+Run lein -test to execute on the small data set and compare results with the ITA provided
+answer.
 
 ## Installation
 
-FIXME: write
+Install the leiningen Clojure build tool (https://github.com/technomancy/leiningen).
+
+Run lein -deps to pull in needed dependencies.
 
 ## License
 
-Copyright (C) 2010 FIXME
+Copyright (C) 2011 Clinton Jenkins
 
 Distributed under the Eclipse Public License, the same as Clojure.
