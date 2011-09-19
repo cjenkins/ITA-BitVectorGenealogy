@@ -1,6 +1,12 @@
 (ns BitVectorGenealogy.test.core
+  (:require [BitVectorGenealogy.io :as io])
   (:use [BitVectorGenealogy.core] :reload)
   (:use [clojure.test]))
 
-(deftest replace-me ;; FIXME: write
-  (is false "No tests have been written."))
+(def small-data "./Data/bitvectors-genes.data.small")
+
+(def result-data "./Data/bitvectors-parents.data.small.txt")
+
+(deftest result-test
+  (is (= (solve-ita-problem small-data)
+	 (io/load-results result-data))))
